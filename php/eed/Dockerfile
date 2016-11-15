@@ -1,25 +1,25 @@
 FROM debian:jessie
 
 RUN apt-get update \
-	&& apt-get install -y \
-		pdftk \
-		apache2 \
-		php5 \
-		php5-curl \
-		php5-json \
-		php5-mysql \
-		php5-pgsql \
-		php5-gd \
-		php5-mcrypt \
-		php5-xdebug \
-		python-pip \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& /usr/sbin/a2dismod 'mpm_*' \
-	&& /usr/sbin/a2enmod mpm_prefork \
-	&& /usr/sbin/a2enmod rewrite \
-	&& /usr/sbin/a2enmod headers \
-	&& mv /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.bak \
-    && pip-install csvkit
+    && apt-get install -y \
+        pdftk \
+        apache2 \
+        php5 \
+        php5-curl \
+        php5-json \
+        php5-mysql \
+        php5-pgsql \
+        php5-gd \
+        php5-mcrypt \
+        php5-xdebug \
+        python-pip \
+    && rm -rf /var/lib/apt/lists/* \
+    && /usr/sbin/a2dismod 'mpm_*' \
+    && /usr/sbin/a2enmod mpm_prefork \
+    && /usr/sbin/a2enmod rewrite \
+    && /usr/sbin/a2enmod headers \
+    && mv /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.bak \
+    && pip install csvkit
 
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
