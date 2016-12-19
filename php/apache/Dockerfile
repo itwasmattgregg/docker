@@ -21,6 +21,10 @@ RUN apt-get update \
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
+RUN find /etc/php5/ -type f -exec sed -i 's/post_max_size\s*=.*/post_max_size=80M/g' {} \;
+RUN find /etc/php5/ -type f -exec sed -i 's/upload_max_filesize\s*=.*/upload_max_filesize=80M/g' {} \;
+RUN echo 'xdebug.max_nesting_level=200' >> /etc/php5/mods-available/xdebug.ini
+
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
